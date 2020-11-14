@@ -87,4 +87,61 @@ Content-Type: text/html
 
 </CodeSurfer>
 
+---
 
+# Great, but what about CORS?
+
+---
+
+# Types of CORS Requests
+
+- Simple GET and POST XMLHttpRequests/fetch (no preflight)
+- Complex XMLHttpRequests/fetch (required preflight)
+
+---
+
+## What is a Simple CORS Request?
+
+### One of the allowed methods:
+ - `GET`
+ - `HEAD`
+ - `POST`
+
+
+---
+
+## What is a Simple CORS Request?
+
+### Only has CORS-safelisted request-headers:
+
+ ```
+ Accept, Accept-Language,
+ Content-Language, Content-Type*,
+ DPR, Downlink, Save-Data,
+ Viewport-Width, Width
+ ```
+
+---
+
+## What is a Simple CORS Request?
+
+### Allowed `Content-Type` values
+ - application/x-www-form-urlencoded
+ - multipart/form-data
+ - text/plain
+
+---
+
+## What is a Simple CORS Request?
+
+ - No event listeners are registered on any XMLHttpRequestUpload object used in the request
+ - No ReadableStream object is used in the request.
+
+---
+
+## What is a Simple CORS Request?
+
+As long as the HTTP response contains an `Access-Control-Allow-Origin` header with a value that matches
+the request `Origin` header, a simple request will go through.
+
+The browser will stop anything from working that does not fit.
