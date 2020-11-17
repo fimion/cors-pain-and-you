@@ -3,14 +3,28 @@ import {
   CodeSurferColumns,
   Step
 } from "code-surfer";
-import { nightOwl } from '@code-surfer/themes';
+import {Image} from 'mdx-deck';
+import PreflightCorrectImage from './images/preflight_correct.png';
+import { github } from '@code-surfer/themes';
 import "prismjs/components/prism-http.js";
 
-export const theme = nightOwl;
+export const theme = github;
+
+<CodeSurferColumns>
+
+<Step>
+
+<div>
 
 # CORS, Pain, and You
 
 ## A brief jaunt through the agony of CORS
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
 
@@ -100,35 +114,46 @@ Content-Type: text/html
 
 ---
 
-## What is a Simple CORS Request?
+<CodeSurferColumns>
+
+<Step title="What is a Simple CORS Request" >
+
+<div>
 
 ### One of the allowed methods:
- - `GET`
- - `HEAD`
- - `POST`
+- `GET`
+- `HEAD`
+- `POST`
 
+</div>
 
----
-
-## What is a Simple CORS Request?
+<div>
 
 ### Only has CORS-safelisted request-headers:
+- Accept
+- Accept-Language
+- Content-Language
+- **Content-Type***
+- DPR
+- Downlink
+- Save-Data
+- Viewport-Width
+- Width
 
- ```
- Accept, Accept-Language,
- Content-Language, Content-Type*,
- DPR, Downlink, Save-Data,
- Viewport-Width, Width
- ```
+</div>
 
----
-
-## What is a Simple CORS Request?
+<div>
 
 ### Allowed `Content-Type` values
- - application/x-www-form-urlencoded
- - multipart/form-data
- - text/plain
+- `application/x-www-form-urlencoded`
+- `multipart/form-data`
+- `text/plain`
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
 
@@ -141,7 +166,89 @@ Content-Type: text/html
 
 ## What is a Simple CORS Request?
 
-As long as the HTTP response contains an `Access-Control-Allow-Origin` header with a value that matches
-the request `Origin` header, a simple request will go through.
+As long as the HTTP **response** contains an `Access-Control-Allow-Origin` header with a value that matches
+the **request** `Origin` header, a simple request will go through.
 
 The browser will stop anything from working that does not fit.
+
+---
+
+### How does a Preflight request work?
+
+<img src={PreflightCorrectImage} style="max-height:80%;" />
+
+---
+
+#  "`Access-Control-*`" (CORS) Headers
+
+```
+Access-Control-Allow-Origin
+Access-Control-Expose-Headers
+Access-Control-Max-Age
+Access-Control-Allow-Credentials
+Access-Control-Allow-Methods
+Access-Control-Allow-Headers
+```
+
+---
+
+## Access-Control-Allow-Origin
+
+Specifies the request Origin(s) allowed by the server.<br /> You can allow all by using `*` as the value.
+
+Example:
+```
+Access-Control-Allow-Origin: https://mozilla.org
+Vary: Origin
+```
+
+---
+
+## Access-Control-Expose-Headers
+
+Lets a server whitelist headers that Javascript<br /> (such as `getResponseHeader()`) in browsers are allowed to access.
+
+Example:
+
+`Access-Control-Expose-Headers: X-Custom-Header, X-Custom-Header-2`
+
+---
+
+## Access-Control-Max-Age
+
+Indicates how long the results of a preflight request can be cached in seconds.
+
+Example:
+
+`Access-Control-Max-Age: 3600`
+
+---
+
+## Access-Control-Allow-Credentials
+
+Indicates whether or not the response to the request<br />
+can be exposed when the credentials flag is true.<br />
+When used as part of a response to a preflight request,<br />
+this indicates whether the actual request can be made using credentials.
+
+---
+
+## Access-Control-Allow-Methods
+
+Specifies the method or methods allowed when accessing<br />
+the resource. This is used in response to a preflight request.
+
+---
+
+## Access-Control-Allow-Headers
+
+is used in response to a preflight request to indicate which<br />
+HTTP headers can be used when making the actual request.
+
+---
+
+# Questions?
+
+#### you probably have questions....
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
